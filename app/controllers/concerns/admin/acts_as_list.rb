@@ -8,8 +8,8 @@ module Admin
     extend ActiveSupport::Concern
 
     included do
-      before_filter :get_object, :only => [:position]
-      before_filter :check_resource_ownership, :only => [:position]
+      before_filter :get_object, :except => [:index]
+      before_filter :check_resource_ownership, :except => [:index, :show]
     end
 
     def position
