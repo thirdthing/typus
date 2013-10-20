@@ -43,14 +43,17 @@ module Admin::Resources::DataTypes::HasManyHelper
 
   def set_has_many_resource_actions
     klass = @model_to_relate
+    # @resource_actions = [set_has_many_resource_edit_action(klass),
+    #                      set_has_many_resource_show_action(klass),
+    #                      set_has_many_resource_destroy_action(klass)]
     @resource_actions = [set_has_many_resource_edit_action(klass),
-                         set_has_many_resource_show_action(klass),
                          set_has_many_resource_destroy_action(klass)]
   end
 
   def set_has_many_resource_edit_action(klass)
-    html_options = set_modal_options_for(klass)
-    [ "Edit", { :action => 'edit', :anchor => html_options['data-controls-modal'] }, html_options ]
+    # html_options = set_modal_options_for(klass)
+    # [ "Edit", { :action => 'edit', :anchor => html_options['data-controls-modal'] }, html_options ]
+    [ "Edit", { :action => 'edit' } ]
   end
 
   def set_has_many_resource_show_action(klass)
