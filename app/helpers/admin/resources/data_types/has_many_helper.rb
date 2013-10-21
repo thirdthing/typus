@@ -35,7 +35,8 @@ module Admin::Resources::DataTypes::HasManyHelper
     if admin_user.can?("create", klass)
 
       html_options = set_modal_options_for(klass)
-      html_options["url"] = "/admin/#{klass.to_resource}/new?_popup=true"
+      # html_options["url"] = "/admin/#{klass.to_resource}/new?_popup=true"
+      html_options["url"] = "/admin/#{klass.to_resource}/new?_popup=true&resource%5B#{@resource.model_name.singular}_id%5D=#{@item.id}"
 
       link_to Typus::I18n.t("Add"), "##{html_options['data-controls-modal']}", html_options
     end
