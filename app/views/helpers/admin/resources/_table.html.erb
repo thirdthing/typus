@@ -25,8 +25,9 @@
           <%= check_box_tag "selected_item_ids[]", item.id, false, :class => "action-select" %>
         </td>
       <% end %>
+      <% fieldtypes = fields.dup %>
       <% table_fields_for_item(item, fields).each do |field| %>
-        <td><%= field %></td>
+        <td class="<%= fieldtypes.shift[1].to_s %>"><%= field %></td>
       <% end %>
       <td>
         <div class="btn-toolbar" style="margin: 0px;">
