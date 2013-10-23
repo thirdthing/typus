@@ -16,5 +16,17 @@
   <% else %>
     <p><%= Typus::I18n.t("No entries found.") %></p>
   <% end %>
+  
+  <% if @resource.read_model_config['multiple_image_upload'] && @resource.read_model_config['multiple_image_upload'].split(", ").include?(association_name) %>
+    <%= form_for(@item, :url => params.dup.cleanup.merge!(:action => 'update'), :html => { :multipart => true, :class => "multi-image", :id => "edit_#{@resource.model_name.singular}_#{@item.id}_multi_image" }) do |f| %>
+      <h3>
+        Add Multiple Images
+      </h3>
+      <div class="form-actions">
+        <%= file_field_tag("#{@resource.model_name.singular}_#{association_name}_image", multiple: true, required: true, name: "#{@resource.model_name.singular}[#{association_name}_attributes][][image]") %>
+        <%= submit_tag("Submit", :name => "_continue", :data => { :disable_with => "Uploading..." }, :class => "btn") %>
+      </div>
+    <% end %>
+  <% end %>
 
 </div>
