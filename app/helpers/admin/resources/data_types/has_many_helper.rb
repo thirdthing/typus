@@ -63,7 +63,7 @@ module Admin::Resources::DataTypes::HasManyHelper
   end
 
   def set_has_many_resource_destroy_action(klass)
-    [ "Trash", { :action => 'destroy' }, { :confirm => "Trash?" } ]
+    [ "Trash", { :action => 'destroy' }, { :data => { :confirm => "Trash?" } } ]
   end
 
 end
