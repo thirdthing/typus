@@ -11,7 +11,7 @@
   <% end %>
 
   <%= admin_display_flash_message %>
-  <% locals = { :options => params.dup.cleanup.merge(:action => 'create', :_popup => nil) } %>
+  <% locals = { :options => params.dup.cleanup.merge(:action => 'create') } %>
 
   <%= render 'form', locals %>
 

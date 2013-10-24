@@ -34,7 +34,7 @@
           <div class="btn-group">
             <% table_actions(model, item, association_name).each do |action| %>
               <% html_options = action[:options] || {} %>
-              <%= link_to url_for(action[:url]), html_options.merge(class: 'btn btn-small') do %>
+              <%= link_to url_for(action[:url]), html_options.merge(class: 'ajax-modal btn btn-small') do %>
                 <i class="icon-<%= action[:url][:action] %>"></i>
                 <%= action[:message] %>
               <% end %>

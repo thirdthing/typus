@@ -52,9 +52,9 @@ module Admin::Resources::DataTypes::HasManyHelper
   end
 
   def set_has_many_resource_edit_action(klass)
-    # html_options = set_modal_options_for(klass)
-    # [ "Edit", { :action => 'edit', :anchor => html_options['data-controls-modal'] }, html_options ]
-    [ "Edit", { :action => 'edit' } ]
+    html_options = set_modal_options_for(klass)
+    html_options["url"] = "/admin/#{klass.to_resource}/edit?_popup=true"
+    [ "Edit", { :action => 'edit', :anchor => html_options['data-controls-modal'] }, html_options ]
   end
 
   def set_has_many_resource_show_action(klass)
