@@ -2,6 +2,7 @@
 //= require jquery_ujs
 //= require jquery.form
 //= require js/bootstrap.min.js
+//= require bootstrap.file-input
 //= require typus/jquery.application
 //= require typus/custom
 
@@ -14,5 +15,11 @@ $(".ajax-modal").live('click', function() {
   $modal_header.find('.action_name').remove();
   $modal_header.html('<span class="action_name">' + this_action + ' </span>' + $modal_header.html());
   
-  $("#" + modal_id + " .modal-body").load(url);
+  $("#" + modal_id + " .modal-body").load(url, function(){
+    $('.modal-body input[type=file]').removeClass('input-xxlarge').attr('title', 'Choose File').bootstrapFileInput();
+  });
+});
+
+$(document).ready(function() {
+  $('input[type=file]').bootstrapFileInput();
 });

@@ -1,3 +1,41 @@
 body.base { padding-top: 20px; }
 h1 { padding-bottom: 0.5em; }
 .icon-destroy { background-position: -456px 0; }
+
+.modal {
+  width: 574px;
+  margin-left: -287px;
+}
+
+.modal-body {
+  max-height: none;
+}
+
+.box_relationships {
+  margin: 4em 0 8em 0;
+}
+
+td.paperclip {
+  width: 70px;
+}
+
+fieldset {
+  .file-input-wrapper {
+    margin-left: 8px;
+  }
+}
+
+.multi-submit {
+  margin-left: 8px;
+}
+
+.thumbnail {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.date {
+  select {
+    width: 120px;
+  }
+}

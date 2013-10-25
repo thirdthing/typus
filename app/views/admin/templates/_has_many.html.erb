@@ -23,8 +23,8 @@
         Add Multiple Images
       </h3>
       <div class="form-actions">
-        <%= file_field_tag("#{@resource.model_name.singular}_#{association_name}_image", multiple: true, required: true, name: "#{@resource.model_name.singular}[#{association_name}_attributes][][image]") %>
-        <%= submit_tag("Submit", :name => "_continue", :data => { :disable_with => "Uploading..." }, :class => "btn") %>
+        <%= file_field_tag("#{@resource.model_name.singular}_#{association_name}_image", multiple: true, required: true, name: "#{@resource.model_name.singular}[#{association_name}_attributes][][image]", title: "Choose Files") %>
+        <%= submit_tag("Submit", :name => "_continue", :data => { :disable_with => "Uploading..." }, :class => "btn multi-submit") %>
       </div>
     <% end %>
   <% end %>
