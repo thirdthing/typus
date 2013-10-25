@@ -8,7 +8,7 @@ h1 { padding-bottom: 0.5em; }
 }
 
 .modal-body {
-  max-height: none;
+  max-height: 500px;
 }
 
 .box_relationships {
@@ -38,4 +38,8 @@ fieldset {
   select {
     width: 120px;
   }
+}
+
+.table {
+  border-bottom: 1px solid #ddd;
 }

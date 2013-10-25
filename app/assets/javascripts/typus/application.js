@@ -3,6 +3,7 @@
 //= require jquery.form
 //= require js/bootstrap.min.js
 //= require bootstrap.file-input
+//= require bootstrap-lightbox.min
 //= require typus/jquery.application
 //= require typus/custom
 
@@ -16,10 +17,17 @@ $(".ajax-modal").live('click', function() {
   $modal_header.html('<span class="action_name">' + this_action + ' </span>' + $modal_header.html());
   
   $("#" + modal_id + " .modal-body").load(url, function(){
-    $('.modal-body input[type=file]').removeClass('input-xxlarge').attr('title', 'Choose File').bootstrapFileInput();
+    $('.modal-body input[type=file]').bootstrapFileInput();
   });
 });
 
 $(document).ready(function() {
+  $('.paperclip-lightbox-link').on('click', function(e) {
+    $('#paperclip-lightbox .lightbox-content').html('<img src="' + $(this).data('image-url') + '">');
+    $('#paperclip-lightbox').lightbox();
+    return false;
+  });
+  
   $('input[type=file]').bootstrapFileInput();
 });
+

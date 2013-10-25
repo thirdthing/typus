@@ -67,6 +67,7 @@
   <%= build_filters %>
 
   <% if @items.any? -%>
+    <%= render 'admin/templates/modals/paperclip' %>
     <% if controller.respond_to?(:bulk) %>
       <%= build_actions { build_list(@resource, fields, @items) } %>
     <% else %>

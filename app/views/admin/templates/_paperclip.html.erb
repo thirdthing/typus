@@ -2,7 +2,7 @@
   <%= form.label attribute, link_to_detach_attribute_for_paperclip(attribute), :class => "control-label" %>
   <div class="controls">
     <%= typus_paperclip_preview(@item, attribute) %>
-    <% options = options.merge(:class => "") %>
+    <% options = options.merge(:class => "", :title => "Choose File") %>
     <%= form.file_field attribute, options %>
   </div>
 </div>
