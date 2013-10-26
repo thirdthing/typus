@@ -29,5 +29,6 @@ $(document).ready(function() {
   });
   
   $('input[type=file]').bootstrapFileInput();
+  $('.file-input-wrapper').prepend('<i class="icon-plus"></i>');
 });
 
