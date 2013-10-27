@@ -1,5 +1,5 @@
 <%
-  page_title = Typus::I18n.t("%{resource} %{id}", :resource => @resource.model_name.human, :id => @item.identifier)
+  page_title = Typus::I18n.t("%{resource} %{id}", :resource => @resource.model_name.human.titlecase, :id => @item.identifier)
   admin_title(page_title)
 %>
 

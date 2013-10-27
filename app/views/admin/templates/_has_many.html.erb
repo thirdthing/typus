@@ -5,7 +5,7 @@
 <div class="box_relationships" id="<%= association_name %>">
 
   <h2>
-    <%= @resource.human_attribute_name(association_name) %>
+    <%= @resource.human_attribute_name(association_name).titlecase %>
     <%= " (#{@data.count})" if @resource.typus_options_for(:counters) %>
     <small><%= add_new %></small>
   </h2>
