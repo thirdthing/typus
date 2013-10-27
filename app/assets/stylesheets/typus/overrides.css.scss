@@ -34,12 +34,6 @@ fieldset {
   vertical-align: middle;
 }
 
-.date {
-  select {
-    width: 120px;
-  }
-}
-
 .table {
   border-bottom: 1px solid #ddd;
 }
@@ -54,4 +48,8 @@ fieldset {
   .btn {
     padding: 2px 6px;
   }
+  .position_value {
+    padding: 2px 10px;
+  }
 }
+
