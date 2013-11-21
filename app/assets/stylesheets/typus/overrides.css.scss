@@ -57,7 +57,7 @@ fieldset {
 
 [class^="icon-"],
 [class*=" icon-"] {
-  background-image: url("/img/glyphicons-halflings.png");
+  background-image: image-url("img/glyphicons-halflings.png");
 }
 .icon-white,
 .nav-pills > .active > a > [class^="icon-"],
@@ -76,5 +76,5 @@ fieldset {
 .dropdown-submenu:focus > a > [class^="icon-"],
 .dropdown-submenu:hover > a > [class*=" icon-"],
 .dropdown-submenu:focus > a > [class*=" icon-"] {
-  background-image: url("/img/glyphicons-halflings-white.png");
+  background-image: image-url("img/glyphicons-halflings-white.png");
 }
