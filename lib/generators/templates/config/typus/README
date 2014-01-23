@@ -24,6 +24,7 @@ Use this example as reference to customize your YAML files.
         show: rebuild
       order_by: created_at
       relationships:
+      multiple_image_upload: relationship
       filters: is_published?, created_at, category_id
       search: title, body
       application: Application
@@ -36,6 +37,9 @@ Use this example as reference to customize your YAML files.
         only_user_items: true
         per_page: 25
         start_year: 1990
+
+The multiple_image_upload works for a has_many relationship where the related model has a paperclip attachment called image.
+For example, if Project has_many ProjectImages, you would use relationships: project_images and multiple_image_upload: project_images (and accepts_nested_attributes_for :project_images in the Project model).
 
 # Roles
 

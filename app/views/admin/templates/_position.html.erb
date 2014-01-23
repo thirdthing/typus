@@ -1,5 +1,6 @@
-<%= item.position %>
-
-<div class="position">
-  <%= html_position.join(connector).html_safe %>
+<div class="position_actions btn-group">
+  <span class="position_value btn disabled">
+    <%= item.position %>
+  </span>
+  <%= html_position.join("").html_safe %>
 </div>

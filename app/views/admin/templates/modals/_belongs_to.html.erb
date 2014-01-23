@@ -1,6 +1,6 @@
 <% content_for "modal_for_#{attribute}" do %>
 
-  <% new_page_title = Typus::I18n.t("Add %{resource}", :resource => related.model_name.human.titleize) %>
+  <% new_page_title = related.model_name.human.titleize %>
 
   <div id="modal-from-dom-<%= attribute_id %>" class="modal hide fade">
 
@@ -18,7 +18,7 @@
 
     <script>
 
-      <%= object_id = "new_#{related.model_name.to_s.downcase}" %>
+      <% object_id = "new_#{related.model_name.to_s.downcase}" %>
 
       $('#modal-form-submit').click(function(e){
         e.preventDefault();
@@ -45,7 +45,7 @@
           return false;
         });
 
-        $('#<%= related.model_name.to_s.downcase %>').submit();
+        $('#<%= object_id %>').submit();
 
         return false;
       });

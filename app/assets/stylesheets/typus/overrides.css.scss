@@ -1,3 +1,80 @@
 body.base { padding-top: 20px; }
 h1 { padding-bottom: 0.5em; }
 .icon-destroy { background-position: -456px 0; }
+
+.modal {
+  width: 574px;
+  margin-left: -287px;
+}
+
+.modal-body {
+  max-height: 500px;
+}
+
+.box_relationships {
+  margin: 4em 0 8em 0;
+}
+
+td.paperclip {
+  width: 70px;
+}
+
+fieldset {
+  .file-input-wrapper {
+    margin-left: 8px;
+  }
+}
+
+.multi-submit {
+  margin-left: 8px;
+}
+
+.thumbnail {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.table {
+  border-bottom: 1px solid #ddd;
+}
+
+.file-input-wrapper {
+  i {
+    margin: 0 6px 0 -2px;
+  }
+}
+
+.position_actions {
+  .btn {
+    padding: 2px 6px;
+  }
+  .position_value {
+    padding: 2px 10px;
+  }
+}
+
+/* Override Bootstrap icon paths so they work with asset pipeline */
+
+[class^="icon-"],
+[class*=" icon-"] {
+  background-image: image-url("img/glyphicons-halflings.png");
+}
+.icon-white,
+.nav-pills > .active > a > [class^="icon-"],
+.nav-pills > .active > a > [class*=" icon-"],
+.nav-list > .active > a > [class^="icon-"],
+.nav-list > .active > a > [class*=" icon-"],
+.navbar-inverse .nav > .active > a > [class^="icon-"],
+.navbar-inverse .nav > .active > a > [class*=" icon-"],
+.dropdown-menu > li > a:hover > [class^="icon-"],
+.dropdown-menu > li > a:focus > [class^="icon-"],
+.dropdown-menu > li > a:hover > [class*=" icon-"],
+.dropdown-menu > li > a:focus > [class*=" icon-"],
+.dropdown-menu > .active > a > [class^="icon-"],
+.dropdown-menu > .active > a > [class*=" icon-"],
+.dropdown-submenu:hover > a > [class^="icon-"],
+.dropdown-submenu:focus > a > [class^="icon-"],
+.dropdown-submenu:hover > a > [class*=" icon-"],
+.dropdown-submenu:focus > a > [class*=" icon-"] {
+  background-image: image-url("img/glyphicons-halflings-white.png");
+}

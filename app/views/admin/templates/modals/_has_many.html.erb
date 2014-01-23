@@ -1,8 +1,8 @@
 <%
-  new_page_title = Typus::I18n.t("Add %{resource}", :resource => @model_to_relate.model_name.human.titleize)
-  html_class = "new_#{@model_to_relate.model_name.to_s.downcase}"
+  new_page_title = @model_to_relate.model_name.human.titleize
+  html_class = "new_#{@model_to_relate.model_name.singular}"
   html_modal_class = "modal-from-dom-#{@model_to_relate.table_name}"
-  modal_association = "#{@resource.model_name.to_s.downcase}_#{@model_to_relate.table_name}"
+  modal_association = "#{@resource.model_name.singular}_#{@model_to_relate.table_name}"
 %>
 
 <div id="<%= html_modal_class %>" class="modal hide fade">
@@ -22,30 +22,22 @@
     $('#modal-form-submit-<%= modal_association %>').on('click', function(e){
       e.preventDefault();
 
-      var form_data = $('#<%= html_class %>').serialize();
-      var my_data = $("#view_ip").attr('value');
-
-      $('#<%= html_class %>').on('submit', function(event) {
-
-        event.preventDefault();
-
-        // Get the action url:
-        var action = $('#<%= html_class %>').attr('action');
-        var form_data = $('#<%= html_class %>').serialize();
-
-        $.post(action, form_data, function(data){})
-        .success(function(data, text, xhr) {
+      var options = {
+        success: function(responseText, statusText, xhr, $form) {
           $("#<%= html_modal_class %>").modal('hide');
           parent.location.reload();
-        })
-        .error(function(request, status, error) {
-          $('#<%= html_modal_class %> .modal-body').html(request.responseText);
-        });
-
+        },
+        error: function(xhr, status, error, $form) {
+          $('#<%= html_modal_class %> .modal-body').html("<h4>Error</h4><p>" + xhr.status + "</p>" + "<p>" + xhr.statusText + "</p>");
+        }
+      };
+      
+      $('#<%= html_modal_class %> form').on('submit', function(event) {
+        $(this).ajaxSubmit(options);
         return false;
       });
 
-      $('#<%= html_class %>').submit();
+      $('#<%= html_modal_class %> form').submit();
       return false;
     });
 

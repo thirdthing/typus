@@ -1,5 +1,5 @@
 <%
-  page_title = Typus::I18n.t("Edit %{resource} %{id}", :resource => @resource.model_name.human, :id => @item.identifier)
+  page_title = Typus::I18n.t("Edit %{resource} %{id}", :resource => @resource.model_name.human.titlecase, :id => @item.identifier)
   admin_title(page_title)
 %>
 
@@ -17,6 +17,7 @@
 
   <% unless headless_mode? %>
     <%= render 'admin/shared/modals' %>
+    <%= render 'admin/templates/modals/paperclip' %>
     <%= typus_relationships %>
   <% end %>
 <% end %>
