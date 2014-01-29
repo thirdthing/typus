@@ -23,7 +23,7 @@ module Admin::Resources::DataTypes::PaperclipHelper
   def typus_paperclip_preview(item, attachment, options = {})
     if (data = item.send(attachment)).exists?
       styles = data.styles.keys
-      if data.content_type =~ /^image\/.+/ && styles.include?(Typus.file_preview) && styles.include?(Typus.file_thumbnail)
+      if (data.content_type =~ /^image\/.+/ || data.content_type =~ /^application\/pdf/) && styles.include?(Typus.file_preview) && styles.include?(Typus.file_thumbnail)
         render "admin/templates/paperclip_preview",
                :preview => data.url(Typus.file_preview, false),
                :thumb => data.url(Typus.file_thumbnail, false),
