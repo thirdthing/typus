@@ -1,5 +1,6 @@
 <%
   page_title = Typus::I18n.t("Edit %{resource} %{id}", :resource => @resource.model_name.human.titlecase, :id => @item.identifier)
+  page_title = "Edit #{@resource.model_name.human.titlecase}: #{@item.to_label}" if @resource.instance_methods(false).include?(:to_label)
   admin_title(page_title)
 %>
 
