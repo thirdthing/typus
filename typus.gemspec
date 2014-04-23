@@ -25,5 +25,5 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "bcrypt-ruby", "~> 3.1.2"
   spec.add_dependency "jquery-rails"
-  spec.add_dependency "rails", "~> 4.0.1"
+  spec.add_dependency "rails", ">= 4.0.1"
 end
