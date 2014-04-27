@@ -12,7 +12,8 @@ module Admin::Resources::RelationshipsHelper
     @data = @item.send(@field).order(@model_to_relate.typus_order_by).where(set_conditions)
     page = params["#{@association_name}_page"]
     items_per_page = @model_to_relate.typus_options_for(:per_page)
-    @items = @data.limit(items_per_page)
+    offset = params[:offset] || 0
+    @items = @data.limit(items_per_page).offset(offset)
   end
 
   def build_relationship_table
