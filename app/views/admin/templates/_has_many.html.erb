@@ -12,7 +12,7 @@
 
   <% if @items.any? -%>
     <%= table %>
-    <%= admin_paginate %>
+    <%= admin_paginate(@model_to_relate) %>
   <% else %>
     <p><%= Typus::I18n.t("No entries found.") %></p>
   <% end %>
