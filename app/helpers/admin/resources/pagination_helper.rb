@@ -12,6 +12,11 @@ module Admin::Resources::PaginationHelper
 
     options = {}
 
+    # count only the related items if we're paginating a has_many view
+    unless @association_name.nil?
+      resource = @item.send(@association_name)
+    end
+
     current_page = (params[:offset].to_f / params[:per_page]) + 1
     num_pages = (resource.count.to_f / params[:per_page]).ceil
     unless current_page >= num_pages
