@@ -55,9 +55,17 @@ module Admin::Resources::DataTypes::HasManyHelper
   end
 
   def set_has_many_resource_edit_action(klass)
-    html_options = set_modal_options_for(klass)
-    html_options["url"] = "/admin/#{klass.to_resource}/edit?_popup=true"
-    [ "Edit", { :action => 'edit', :anchor => html_options['data-controls-modal'] }, html_options ]
+    
+    if @resource.read_model_config['use_modal_edit'] && @resource.read_model_config['use_modal_edit'].split(", ").include?(@association_name)
+      html_options = set_modal_options_for(klass)
+      html_options["url"] = "/admin/#{klass.to_resource}/edit?_popup=true"
+      [ "Edit", { :action => 'edit', :anchor => html_options['data-controls-modal'] }, html_options ]
+    else
+      html_options = {}
+      html_options["url"] = "/admin/#{klass.to_resource}/edit"
+      [ "Edit", { :action => 'edit', :_from_parent => "/admin/#{@resource.to_resource}/edit/#{@item.id}" }, html_options ]
+    end
+    
   end
 
   def set_has_many_resource_show_action(klass)

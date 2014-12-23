@@ -61,6 +61,9 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def edit
+    if params[:_from_parent]
+      @from_parent = params[:_from_parent]
+    end
     custom_actions_for(:edit).each do |action|
       prepend_resources_action(action.titleize, {:action => action, :id => @item})
     end
@@ -210,7 +213,12 @@ class Admin::ResourcesController < Admin::BaseController
     message = params[:action].eql?('create') ? "%{model} successfully created." : "%{model} successfully updated."
     notice = Typus::I18n.t(message, :model => @resource.model_name.human)
 
-    redirect_to path.merge!(options).compact.to_hash, :notice => notice
+    if params[:_from_parent]
+      redirect_to params[:_from_parent], :notice => notice
+    else
+      redirect_to path.merge!(options).compact.to_hash, :notice => notice
+    end
+
   end
 
   def set_default_action

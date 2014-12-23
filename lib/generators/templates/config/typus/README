@@ -25,6 +25,7 @@ Use this example as reference to customize your YAML files.
       order_by: created_at
       relationships:
       multiple_image_upload: relationship
+      use_modal_edit: relationship
       filters: is_published?, created_at, category_id
       search: title, body
       application: Application

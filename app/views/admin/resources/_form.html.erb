@@ -18,6 +18,9 @@
       <%= hidden_field_tag "_continue" %>
     <% else %>
       <div class="form-actions">
+        <% if @from_parent %>
+          <%= hidden_field_tag "_from_parent", @from_parent %>
+        <% end %>
         <% build_save_options.each do |key, value, special| %>
           <% klass = key.eql?("_save") ? 'btn-primary' : 'btn' %>
           <%
