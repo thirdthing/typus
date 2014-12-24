@@ -19,6 +19,9 @@
   
   <% if @resource.read_model_config['multiple_image_upload'] && @resource.read_model_config['multiple_image_upload'].split(", ").include?(association_name) %>
     <%= form_for(@item, :url => params.dup.cleanup.merge!(:action => 'update'), :html => { :multipart => true, :class => "multi-image", :id => "edit_#{@resource.model_name.singular}_#{@item.id}_multi_image" }) do |f| %>
+      <% if @from_parent %>
+        <%= hidden_field_tag "_from_parent", @from_parent %>
+      <% end %>
       <h3>
         <%= "Add Multiple #{@resource.human_attribute_name(association_name).titlecase}" %>
       </h3>

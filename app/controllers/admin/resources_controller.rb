@@ -37,6 +37,10 @@ class Admin::ResourcesController < Admin::BaseController
   def new
     @item = @resource.new(item_params_for_new)
 
+    if params[:_from_parent]
+      @from_parent = params[:_from_parent]
+    end
+
     respond_to do |format|
       format.html
       format.json { render :json => @item }
@@ -207,16 +211,19 @@ class Admin::ResourcesController < Admin::BaseController
     elsif params[:_continue]
       { :action => 'edit', :id => @item.id }
     else
+      if params[:_from_parent]
+        path = params[:_from_parent]
+      end
       { :action => nil, :id => nil }
     end
 
     message = params[:action].eql?('create') ? "%{model} successfully created." : "%{model} successfully updated."
     notice = Typus::I18n.t(message, :model => @resource.model_name.human)
 
-    if params[:_from_parent]
-      redirect_to params[:_from_parent], :notice => notice
+    if path.is_a?(Hash)
+      redirect_to path.merge!(options.merge(:_from_parent => params[:_from_parent])).compact.to_hash, :notice => notice
     else
-      redirect_to path.merge!(options).compact.to_hash, :notice => notice
+      redirect_to path, :notice => notice
     end
 
   end
