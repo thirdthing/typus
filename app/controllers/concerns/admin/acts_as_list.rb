@@ -16,7 +16,10 @@ module Admin
       if %w(move_to_top move_higher move_lower move_to_bottom).include?(params[:go])
         @item.send(params[:go])
         notice = Typus::I18n.t("%{model} successfully updated.", :model => @resource.model_name.human)
-        redirect_to :back, :notice => notice
+        respond_to do |format|
+          format.html { redirect_to :back, :notice => notice }
+          format.json { render :json => @item }
+        end
       else
         not_allowed
       end

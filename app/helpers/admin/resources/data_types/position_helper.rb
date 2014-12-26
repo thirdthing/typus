@@ -9,10 +9,13 @@ module Admin::Resources::DataTypes::PositionHelper
       first_item = item.respond_to?(:first?) && ([:move_higher, :move_to_top].include?(key) && item.first?)
       last_item = item.respond_to?(:last?) &&  ([:move_lower, :move_to_bottom].include?(key) && item.last?)
 
+      options = { :controller => "/admin/#{item.class.to_resource}", :action => "position", :id => item.id, :go => key }
       unless first_item || last_item
-        options = { :controller => "/admin/#{item.class.to_resource}", :action => "position", :id => item.id, :go => key }
         locals[:html_position] << link_to("<i class=\"#{icons[key]}\"></i>".html_safe, params.merge(options), { :class => "#{Typus::I18n.t(value).downcase} btn btn-small", :title => "#{value}" })
+      else
+        locals[:html_position] << link_to("<i class=\"#{icons[key]}\"></i>".html_safe, params.merge(options), { :class => "#{Typus::I18n.t(value).downcase} btn btn-small hide", :title => "#{value}" })
       end
+
     end
 
     render "admin/templates/position", locals

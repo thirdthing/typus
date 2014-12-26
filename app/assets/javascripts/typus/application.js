@@ -30,5 +30,33 @@ $(document).ready(function() {
   
   $('input[type=file]').bootstrapFileInput();
   $('.file-input-wrapper').prepend('<i class="icon-plus"></i>');
+
+  $('.position_actions a').on('click', function(e) {
+    e.preventDefault();
+    $link = $(this);
+    $.getJSON($(this).attr('href'), function(data) {
+      var $row = $link.closest('tr');
+      var $tbody = $link.closest('tbody');
+      var firstPosition = parseInt($tbody.find('.position_value:first').text().trim(), 10)
+      if ($link.hasClass('top')) {
+        $row.prependTo($tbody);
+      }
+      if ($link.hasClass('bottom')) {
+        $row.appendTo($tbody);
+      }
+      if ($link.hasClass('up')) {
+        $row.insertBefore($row.prev());
+      }
+      if ($link.hasClass('down')) {
+        $row.insertAfter($row.next());
+      }
+      $('.position_value').each(function(index) {
+        $(this).text(index + firstPosition);
+      });
+      $tbody.find('.position_actions a').removeClass('hide');
+      $tbody.find('tr:first a.top, tr:first a.up, tr:last a.bottom, tr:last a.down').addClass('hide');
+    });
+  });
+  
 });
 
