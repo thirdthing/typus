@@ -37,7 +37,7 @@ $(document).ready(function() {
     $.getJSON($(this).attr('href'), function(data) {
       var $row = $link.closest('tr');
       var $tbody = $link.closest('tbody');
-      var firstPosition = parseInt($tbody.find('.position_value:first').text().trim(), 10)
+      var firstPosition = parseInt($tbody.find('.position_value:first').text().trim(), 10);
       if ($link.hasClass('top')) {
         $row.prependTo($tbody);
       }
@@ -50,7 +50,7 @@ $(document).ready(function() {
       if ($link.hasClass('down')) {
         $row.insertAfter($row.next());
       }
-      $('.position_value').each(function(index) {
+      $tbody.find('.position_value').each(function(index) {
         $(this).text(index + firstPosition);
       });
       $tbody.find('.position_actions a').removeClass('hide');
