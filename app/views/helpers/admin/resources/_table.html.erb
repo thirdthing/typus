@@ -46,3 +46,11 @@
   <% end %>
 
 </table>
+
+<% if controller.respond_to?(:position) %>
+
+  <%= javascript_tag do %>
+    initDraggableTable(<%= raw association_name.nil? ? nil : "'##{association_name}'" %>);
+  <% end %>
+  
+<% end %>

@@ -1,6 +1,7 @@
 //= require typus/jquery-1.8.3-min
 //= require jquery_ujs
 //= require jquery.form
+//= require html.sortable
 //= require js/bootstrap.min.js
 //= require bootstrap.file-input
 //= require bootstrap-lightbox.min
@@ -20,6 +21,43 @@ $(".ajax-modal").live('click', function() {
     $('.modal-body input[type=file]').bootstrapFileInput();
   });
 });
+
+var initDraggableTable = function(context) {
+  if (typeof context === "undefined") {
+    context = document;
+  }
+  var $tbody = $(context).find('tbody'),
+    cols = $tbody.find('tr:first td').length,
+    firstPosition;
+  
+  $tbody.sortable({
+    items: 'tr', 
+    placeholder: '<tr><td colspan="' + cols + '">&nbsp;</td></tr>', 
+    forcePlaceholderSize: true
+  }).bind('sortstart', function(e, ui) {
+    ui.item.closest('table').removeClass('table-hover');
+    firstPosition = parseInt($tbody.find('.position_value:first').text().trim(), 10);
+  }).bind('sortupdate', function(e, ui) {
+    var url = ui.item.find('td.position a:first').attr('href').split('?')[0];
+    url += '?go=insert_at&index=' + (ui.item.index() + 1);
+  
+    $.getJSON(url, function(data) {
+      $tbody.find('.position_value').each(function(index) {
+        $(this).text(index + firstPosition);
+      });
+      $tbody.find('.position_actions a').removeClass('hide');
+      $tbody.find('tr:first a.top, tr:first a.up, tr:last a.bottom, tr:last a.down').addClass('hide');
+    });
+  
+    ui.item.closest('table').find('tr').off('mouseenter mouseleave').on('mouseenter', function(e) {
+      $(this).addClass('hovered');
+    }).on('mouseleave', function(e) {
+      $(this).removeClass('hovered');
+    });
+
+  });
+  
+};
 
 $(document).ready(function() {
   $('.paperclip-lightbox-link').on('click', function(e) {

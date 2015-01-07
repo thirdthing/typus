@@ -78,3 +78,13 @@ fieldset {
 .dropdown-submenu:focus > a > [class*=" icon-"] {
   background-image: image-url("img/glyphicons-halflings-white.png");
 }
+
+/* For drag-and-drop table row ordering */
+
+tr.hovered {
+  background-color: #f5f5f5;
+}
+
+.sortable-placeholder {
+  background-color: #ccc;
+}

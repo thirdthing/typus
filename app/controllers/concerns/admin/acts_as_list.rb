@@ -13,8 +13,12 @@ module Admin
     end
 
     def position
-      if %w(move_to_top move_higher move_lower move_to_bottom).include?(params[:go])
-        @item.send(params[:go])
+      if %w(move_to_top move_higher move_lower move_to_bottom insert_at).include?(params[:go])
+        if params[:go] == 'insert_at'
+          @item.send(params[:go], params[:index].to_i)
+        else
+          @item.send(params[:go])
+        end
         notice = Typus::I18n.t("%{model} successfully updated.", :model => @resource.model_name.human)
         respond_to do |format|
           format.html { redirect_to :back, :notice => notice }
