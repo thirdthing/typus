@@ -46,7 +46,12 @@ var initDraggableTable = function(context) {
         $(this).text(index + firstPosition);
       });
       $tbody.find('.position_actions a').removeClass('hide');
-      $tbody.find('tr:first a.top, tr:first a.up, tr:last a.bottom, tr:last a.down').addClass('hide');
+      if (firstPosition == 1) {
+        $tbody.find('tr:first a.top, tr:first a.up').addClass('hide');
+      }
+      if ($tbody.parent().parent().find('.pager').data('total') == $tbody.find('.position_value:last').text().trim()) {
+        $tbody.find('tr:last a.bottom, tr:last a.down').addClass('hide');
+      }
     });
   
     ui.item.closest('table').find('tr').off('mouseenter mouseleave').on('mouseenter', function(e) {
@@ -92,7 +97,12 @@ $(document).ready(function() {
         $(this).text(index + firstPosition);
       });
       $tbody.find('.position_actions a').removeClass('hide');
-      $tbody.find('tr:first a.top, tr:first a.up, tr:last a.bottom, tr:last a.down').addClass('hide');
+      if (firstPosition == 1) {
+        $tbody.find('tr:first a.top, tr:first a.up').addClass('hide');
+      }
+      if ($tbody.parent().parent().find('.pager').data('total') == $tbody.find('.position_value:last').text().trim()) {
+        $tbody.find('tr:last a.bottom, tr:last a.down').addClass('hide');
+      }
     });
   });
   

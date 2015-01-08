@@ -17,8 +17,10 @@ module Admin::Resources::PaginationHelper
       resource = @item.send(@association_name)
     end
 
+    resource_count = resource.count
+    options[:total] = resource_count
     current_page = (params[:offset].to_f / params[:per_page]) + 1
-    num_pages = (resource.count.to_f / params[:per_page]).ceil
+    num_pages = (resource_count.to_f / params[:per_page]).ceil
     unless current_page >= num_pages
       options[:next] = params.merge(offset: next_offset)
     end

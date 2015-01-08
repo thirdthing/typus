@@ -1,4 +1,4 @@
-<ul class="pager">
+<ul class="pager" data-total="<%= options[:total] %>">
   <% if options[:previous] %>
     <li class="previous">
       <% message = "&larr; #{Typus::I18n.t('Previous')}".html_safe %>
