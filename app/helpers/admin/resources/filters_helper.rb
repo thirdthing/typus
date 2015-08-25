@@ -1,6 +1,6 @@
 module Admin::Resources::FiltersHelper
 
-  def build_filters(resource = @resource, params = params)
+  def build_filters(resource = @resource, params = self.params)
     if (typus_filters = resource.typus_filters).any?
       locals = {}
 
@@ -9,7 +9,7 @@ module Admin::Resources::FiltersHelper
                              :value => send("#{value}_filter", key) }
                          end
 
-      rejections = %w(controller action locale utf8 sort_order order_by) + locals[:filters].map { |f| f[:key] }
+      rejections = %w(controller action locale utf8 sort_order order_by subdomain) + locals[:filters].map { |f| f[:key] }
       locals[:hidden_filters] = params.dup.delete_if { |k, v| rejections.include?(k) }
 
       render "helpers/admin/resources/filters", locals
