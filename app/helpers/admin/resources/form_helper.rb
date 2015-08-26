@@ -31,7 +31,7 @@ module Admin::Resources::FormHelper
       :class => 'input-xxlarge',
     }
 
-    label_text = @resource.human_attribute_name(attribute)
+    label_text = @resource.human_attribute_name(attribute).html_safe
 
     if options[:disabled] == true
       help_block = "<small>#{Typus::I18n.t("Read only")}</small>".html_safe

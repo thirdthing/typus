@@ -64,10 +64,47 @@ var initDraggableTable = function(context) {
   
 };
 
+function Rgba(rgba){
+	this.rgba = rgba;
+  var a = this.rgba[3] / 255;
+  this.alpha = a.toPrecision(2);
+  // this.toString = function(){ return "rgba("+Array.prototype.join.call(this.rgba,',')+")"; }
+	this.toString = function(){ return "rgba("+Array.prototype.join.call(this.rgba.subarray(0,3),',')+","+this.alpha+")"; }
+}
+$.Event.prototype.rgba=function(){
+	var x =  this.offsetX || (this.pageX - $(this.target).offset().left),
+		y =  this.offsetY || (this.pageY - $(this.target).offset().top),
+    nodeName = this.target.nodeName;
+	if (nodeName==="CANVAS")
+		return new Rgba(this.target.getContext('2d').getImageData(x,y,1,1).data);
+	else if (nodeName==="IMG"){
+		var canvas=document.createElement("canvas");
+		canvas.width=1;
+		canvas.height=1;
+		canvas.getContext('2d').drawImage(this.target,x,y,1,1,0,0,1,1);
+		return new Rgba(canvas.getContext('2d').getImageData(0,0,1,1).data);
+	} else return null;
+}
+
 $(document).ready(function() {
   $('.paperclip-lightbox-link').on('click', function(e) {
+    if ($(this).closest('.control-group').hasClass('colorpicker')) {
+      $('#paperclip-lightbox').addClass('colorpicker');
+      $('.swatch').css('background-color', $('.color-entry input').val());
+    }
     $('#paperclip-lightbox .lightbox-content').html('<img src="' + $(this).data('image-url') + '">');
     $('#paperclip-lightbox').lightbox();
+    
+    $('#paperclip-lightbox img').on('load', function(e) {
+      $(this).on('click', function(e) {
+        var rgba=e.rgba().toString();
+        if ($('.color-entry').length) {
+          $('.color-entry input').val(rgba);
+        }
+        $('.swatch').css('background-color', rgba);
+      });
+    });
+    
     return false;
   });
   
