@@ -20,9 +20,11 @@ module Admin::Resources::DataTypes::StringHelper
   end
 
   def table_string_field(attribute, item)
-    (raw_content = item.send(attribute)).present? ? raw_content : mdash
+    value = (raw_content = item.send(attribute)).present? ? raw_content : mdash
     if @resource.typus_template(attribute) == "color_entry"
-      render "admin/templates/color_entry_table", value: raw_content
+      render "admin/templates/color_entry_table", value: value
+    else
+      value
     end
   end
 

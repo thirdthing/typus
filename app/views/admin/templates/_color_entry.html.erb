@@ -2,6 +2,10 @@
   <% label_text = label_text + '<br/><span class="field_note">(Click image to select)</span>'.html_safe %>
   <%= form.label attribute, label_text, { :class => "control-label" } %>
   <div class="controls">
+    <span class="color_swatch thumbnail">
+      <span class="swatch" style="background-color: <%= @item.send(attribute) %>;"></span>
+    </span>
+    <% options = options.merge(:class => "input-medium") %>
     <%= form.text_field attribute, options %>
   </div>
 </div>
