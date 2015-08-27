@@ -1,5 +1,7 @@
 <div class="control-group color-entry" id="<%= attribute_id %>">
-  <% label_text = label_text + '<br/><span class="field_note">(Click image to select)</span>'.html_safe %>
+  <% if @resource.read_model_config['fields']['options']['templates'].has_value?("paperclip_colorpicker") %>
+    <% label_text = label_text + '<br/><span class="field_note">(Click image to select)</span>'.html_safe %>
+  <% end %>
   <%= form.label attribute, label_text, { :class => "control-label" } %>
   <div class="controls">
     <span class="color_swatch thumbnail">

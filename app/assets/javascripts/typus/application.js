@@ -5,6 +5,7 @@
 //= require js/bootstrap.min.js
 //= require bootstrap.file-input
 //= require bootstrap-lightbox.min
+//= require jqColorPicker.min
 //= require typus/jquery.application
 //= require typus/custom
 
@@ -87,6 +88,7 @@ $.Event.prototype.rgba=function(){
 }
 
 $(document).ready(function() {
+  
   $('.paperclip-lightbox-link').on('click', function(e) {
     if ($(this).closest('.control-group').hasClass('colorpicker')) {
       $('#paperclip-lightbox').addClass('colorpicker');
@@ -96,16 +98,37 @@ $(document).ready(function() {
     $('#paperclip-lightbox').lightbox();
     
     $('#paperclip-lightbox img').on('load', function(e) {
-      $(this).on('click', function(e) {
-        var rgba=e.rgba().toString();
-        if ($('.color-entry').length) {
-          $('.color-entry input').val(rgba);
-        }
-        $('.swatch').css('background-color', rgba);
-      });
+      if ($(this).closest('.lightbox').hasClass('colorpicker')) {
+        $(this).on('click', function(e) {
+          var rgba=e.rgba().toString();
+          if ($('.color-entry').length) {
+            $('.color-entry input').val(rgba);
+            if ($('.color-entry input').data('cp')) {
+              var cp = $('.color-entry input').data('cp');
+              cp.color.setColor(rgba);
+              cp.render();
+            }
+          }
+          $('.swatch').css('background-color', rgba);
+        });
+      }
     });
     
     return false;
+  });
+  
+  $('.color-entry input').colorPicker({
+    renderCallback: function($elm) {
+      if (!$elm.data('cp')) {
+        $elm.data('cp', this);
+      }
+      $elm.css({'background-color': 'inherit', 'color': 'inherit'});
+      $elm.closest('.color-entry').find('.swatch').css('background-color', $elm.val());
+    }
+  }).css({'background-color': 'inherit', 'color': 'inherit'});
+  
+  $('.color_swatch').on('click', function(e) {
+    $(this).closest('.color-entry').find('input').focus();
   });
   
   $('input[type=file]').bootstrapFileInput();
