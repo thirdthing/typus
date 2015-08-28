@@ -1,17 +1,25 @@
 <div class="well" style="padding: 8px 0;">
   <ul class="nav nav-list">
 
-    <% if actions.any? %>
-      <% actions.each do |action| %>
-        <% klass = action[:url][:action].eql?(params[:action]) ? "active" : "inactive" %>
-        <li class="<%= klass %>">
-        <%= link_to url_for(action[:url]) do %>
-          <i class="icon-<%= action[:icon] %>"></i>
-          <%= action[:message] %>
+    <% if params[:_from_parent] && @resource.typus_options_for(:hide_from_sidebar) %>
+      <li class="back_link">
+      <%= link_to params[:_from_parent] do %>
+        <i class="icon-arrow-left"></i>Back
+      <% end %>
+      </li>
+    <% else %>
+      <% if actions.any? %>
+        <% actions.each do |action| %>
+          <% klass = action[:url][:action].eql?(params[:action]) ? "active" : "inactive" %>
+          <li class="<%= klass %>">
+          <%= link_to url_for(action[:url]) do %>
+            <i class="icon-<%= action[:icon] %>"></i>
+            <%= action[:message] %>
+          <% end %>
+          </li>
         <% end %>
-        </li>
       <% end %>
     <% end %>
-
+    
   </ul>
 </div>

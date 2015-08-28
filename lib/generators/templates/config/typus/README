@@ -38,6 +38,8 @@ Use this example as reference to customize your YAML files.
         only_user_items: true
         per_page: 25
         start_year: 1990
+        hide_from_dashboard: true
+        hide_from_sidebar: true
 
 The multiple_image_upload works for a has_many relationship where the related model has a paperclip attachment called image.
 For example, if Project has_many ProjectImages, you would use relationships: project_images and multiple_image_upload: project_images (and accepts_nested_attributes_for :project_images in the Project model).
