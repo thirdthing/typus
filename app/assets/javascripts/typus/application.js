@@ -69,8 +69,11 @@ function Rgba(rgba){
 	this.rgba = rgba;
   var a = this.rgba[3] / 255;
   this.alpha = a.toPrecision(2);
-  // this.toString = function(){ return "rgba("+Array.prototype.join.call(this.rgba,',')+")"; }
-	this.toString = function(){ return "rgba("+Array.prototype.join.call(this.rgba.subarray(0,3),',')+","+this.alpha+")"; }
+	this.toString = function(){ 
+    var alphaString = this.alpha === "1.0" ? "" : ", " + this.alpha,
+        prefix = alphaString === "" ? "rgb" : "rgba";
+    return prefix + "(" + Array.prototype.join.call(this.rgba.subarray(0,3),', ') + alphaString + ")"; 
+  };
 }
 $.Event.prototype.rgba=function(){
 	var x =  this.offsetX || (this.pageX - $(this.target).offset().left),
