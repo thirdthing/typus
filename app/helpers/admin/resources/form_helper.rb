@@ -33,6 +33,10 @@ module Admin::Resources::FormHelper
 
     label_text = @resource.human_attribute_name(attribute).html_safe
 
+    if @resource.read_model_config['fields']['options']['disabled'] && @resource.read_model_config['fields']['options']['disabled'].split(", ").include?(attribute)
+      options[:disabled] = true
+    end
+
     if options[:disabled] == true
       help_block = "<small>#{Typus::I18n.t("Read only")}</small>".html_safe
     end

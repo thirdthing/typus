@@ -15,9 +15,12 @@ Use this example as reference to customize your YAML files.
             is_published: ["Yes, it is", "No, it isn't"]
           date_formats:
             created_at: post_long
+          disabled: name
           selectors:
           templates:
             body: rich_text
+            logo_color: color_entry
+            image: paperclip_colorpicker
       actions:
         index: cleanup
         edit: send_as_newsletter
