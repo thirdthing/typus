@@ -1,0 +1,6 @@
+<div class="control-group" id="<%= attribute_id %>">
+  <%= form.label attribute, label_text, { :class => "control-label" } %>
+  <div class="controls" style="padding-top:5px;">
+    <a href="<%= @item.send(attribute) %>" target="_blank"><%= @item.send(attribute) %></a>
+  </div>
+</div>
