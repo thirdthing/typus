@@ -23,6 +23,8 @@ module Admin::Resources::DataTypes::StringHelper
     value = (raw_content = item.send(attribute)).present? ? raw_content : mdash
     if @resource.typus_template(attribute) == "color_entry"
       render "admin/templates/color_entry_table", value: value
+    elsif @resource.typus_template(attribute) == "link"
+      render "admin/templates/link_table", value: value
     else
       value
     end
