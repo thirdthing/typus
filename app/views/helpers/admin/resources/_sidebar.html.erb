@@ -23,3 +23,20 @@
     
   </ul>
 </div>
+<% if custom_actions.any? %>
+  <div class="well" style="padding: 8px 0;">
+    <ul class="nav nav-list">
+
+        <% custom_actions.each do |action| %>
+          <% klass = action[:url][:action].eql?(params[:action]) ? "active" : "inactive" %>
+          <li class="<%= klass %>">
+          <%= link_to url_for(action[:url]) do %>
+            <i class="icon-<%= action[:icon] %>"></i>
+            <%= action[:message] %>
+          <% end %>
+          </li>
+        <% end %>
+    
+    </ul>
+  </div>
+<% end %>

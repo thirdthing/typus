@@ -92,6 +92,8 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def update
+    cleanup_attributes_before_update
+
     respond_to do |format|
       if @item.update_attributes(item_params_for_update)
         set_attributes_on_update
@@ -154,6 +156,7 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def get_objects
+    cleanup_params
     set_scope
     set_wheres
     set_joins
@@ -260,6 +263,16 @@ class Admin::ResourcesController < Admin::BaseController
 
   def permit_params!
     params[@object_name].permit!
+  end
+
+  def cleanup_params
+    params.delete_if { |_, v| v.empty? }
+  end
+
+  def cleanup_attributes_before_update
+    if Typus.user_class && @item.is_a?(Typus.user_class) && admin_user.is_not_root?
+      params[Typus.user_class_as_symbol].delete(:role)
+    end
   end
 
 end
