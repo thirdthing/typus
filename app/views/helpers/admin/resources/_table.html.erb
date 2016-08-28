@@ -32,7 +32,7 @@
       <td>
         <div class="btn-toolbar" style="margin: 0px;">
           <div class="btn-group">
-            <% table_actions(model, item, association_name).each do |action| %>
+            <% table_actions(model, item).each do |action| %>
               <% html_options = action[:options] || {} %>
               <%= link_to url_for(action[:url]), html_options.merge(class: 'ajax-modal btn btn-small') do %>
                 <i class="icon-<%= action[:url][:action] %>"></i>
@@ -47,10 +47,9 @@
 
 </table>
 
-<% if controller.respond_to?(:position) %>
-
-  <%= javascript_tag do %>
+<%= javascript_tag do %>
+  var table_selector = <%= raw association_name.nil? ? "'table'" : "'##{association_name}'" %>;
+  if ($(table_selector).find('td.position').length > 0) {
     initDraggableTable(<%= raw association_name.nil? ? nil : "'##{association_name}'" %>);
-  <% end %>
-  
+  }
 <% end %>

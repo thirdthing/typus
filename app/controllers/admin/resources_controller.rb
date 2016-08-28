@@ -166,7 +166,7 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def fields
-    @resource.typus_fields_for(params[:action])
+    @resource.typus_fields_for(action_name)
   end
   helper_method :fields
 
@@ -220,7 +220,7 @@ class Admin::ResourcesController < Admin::BaseController
       { :action => nil, :id => nil }
     end
 
-    message = params[:action].eql?('create') ? "%{model} successfully created." : "%{model} successfully updated."
+    message = action_name.eql?('create') ? "%{model} successfully created." : "%{model} successfully updated."
     notice = Typus::I18n.t(message, :model => @resource.model_name.human)
 
     if path.is_a?(Hash)
