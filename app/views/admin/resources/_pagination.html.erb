@@ -2,14 +2,14 @@
   <% if options[:previous] %>
     <li class="previous">
       <% message = "&larr; #{Typus::I18n.t('Previous')}".html_safe %>
-      <%= link_to message, options[:previous] %>
+      <%= link_to message, options[:previous].permit! %>
     </li>
   <% end %>
 
   <% if options[:next] %>
     <li class="next">
       <% message = "#{Typus::I18n.t('Next')} &rarr;".html_safe %>
-      <%= link_to message, options[:next] %>
+      <%= link_to message, options[:next].permit! %>
     </li>
   <% end %>
 </ul>
