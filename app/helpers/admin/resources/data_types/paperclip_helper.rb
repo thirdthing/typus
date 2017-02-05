@@ -1,5 +1,11 @@
 module Admin::Resources::DataTypes::PaperclipHelper
 
+  def display_paperclip(item, attribute)
+    # options = { :width => 25 }
+    options = {} # Don't add a width
+    typus_paperclip_preview(item, attribute, options)
+  end
+
   def table_paperclip_field(attribute, item)
     # options = { :width => 25 }
     options = {} # Don't add a width
@@ -7,14 +13,20 @@ module Admin::Resources::DataTypes::PaperclipHelper
   end
 
   def link_to_detach_attribute_for_paperclip(attribute)
-    validators = @item.class.validators.delete_if { |i| i.class != ActiveModel::Validations::PresenceValidator }.map(&:attributes).flatten.map(&:to_s)
+    validators = @item.class.validators.delete_if { |i| i.class != Paperclip::Validators::AttachmentPresenceValidator }.map(&:attributes).flatten.map(&:to_s)
     attachment = @item.send(attribute)
 
-    if attachment.exists? && !validators.include?("#{attribute}_file_name") && attachment
+    if attachment.present? && !validators.include?(attribute) && attachment
       attribute_i18n = @item.class.human_attribute_name(attribute)
+      link = link_to(
+        t('typus.buttons.remove'),
+        { action: 'update', id: @item.id, _nullify: attribute, _continue: true },
+        { data: { confirm: t('typus.shared.confirm_question') } }
+      )
+
       label_text = <<-HTML
 #{attribute_i18n}
-<small>#{link_to Typus::I18n.t("Remove"), { :action => 'update', :id => @item.id, :_nullify => attribute, :_continue => true }, { :data => { :confirm => Typus::I18n.t("Are you sure?") } } }</small>
+<small>#{link}</small>
       HTML
       label_text.html_safe
     end

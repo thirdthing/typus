@@ -2,10 +2,10 @@ class Admin::AccountController < Admin::BaseController
 
   layout 'admin/session'
 
-  skip_before_filter :reload_config_and_roles, :authenticate, :set_locale
+  skip_before_action :reload_config_and_roles, :authenticate, :set_locale
 
-  before_filter :sign_in?, :except => [:forgot_password, :send_password, :show]
-  before_filter :new?, :only => [:forgot_password, :send_password]
+  before_action :sign_in?, :except => [:forgot_password, :send_password, :show]
+  before_action :new?, :only => [:forgot_password, :send_password]
 
   def new
     flash[:notice] = Typus::I18n.t("Enter your email below to create the first user.")

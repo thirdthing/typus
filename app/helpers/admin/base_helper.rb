@@ -47,11 +47,11 @@ module Admin::BaseHelper
   end
 
   def body_class
-    if params[:controller] == 'admin/dashboard'
-      "base dashboard #{action_name.parameterize}"
-    else
-      "base #{@resource.model_name.human.parameterize} #{action_name.parameterize}"
-    end
+    klass = %w(base)
+    klass << 'dashboard' if params[:controller] == 'admin/dashboard'
+    klass << @resource.model_name.human.parameterize if @resource.try(:model_name)
+    klass << action_name.parameterize
+    klass.join(' ')
   end
 
 end

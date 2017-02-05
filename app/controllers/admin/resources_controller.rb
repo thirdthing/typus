@@ -8,11 +8,11 @@ class Admin::ResourcesController < Admin::BaseController
 
   Whitelist = [:edit, :update, :destroy, :toggle]
 
-  before_filter :get_model
-  before_filter :set_context
-  before_filter :get_object, :only => Whitelist + [:show]
-  before_filter :check_resource_ownership, :only => Whitelist
-  before_filter :check_if_user_can_perform_action_on_resources
+  before_action :get_model
+  before_action :set_context
+  before_action :get_object, :only => Whitelist + [:show]
+  before_action :check_resource_ownership, :only => Whitelist
+  before_action :check_if_user_can_perform_action_on_resources
 
   def index
     get_objects
@@ -42,7 +42,7 @@ class Admin::ResourcesController < Admin::BaseController
     end
 
     respond_to do |format|
-      format.html
+      format.html { render :new }
       format.json { render :json => @item }
     end
   end
