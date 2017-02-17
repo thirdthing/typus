@@ -28,7 +28,8 @@
     <ul class="nav nav-list">
 
         <% custom_actions.each do |action| %>
-          <% klass = action[:url][:action].eql?(params[:action]) ? "active" : "inactive" %>
+          <%# klass = action[:url][:action].eql?(params[:action]) ? "active" : "inactive" %>
+          <% klass = "" %>
           <li class="<%= klass %>">
           <%= link_to url_for(action[:url]) do %>
             <i class="icon-<%= action[:icon] %>"></i>
