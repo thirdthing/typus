@@ -16,7 +16,14 @@ module Admin::Resources::DataTypes::BooleanHelper
                 :id => item.id,
                 :field => attribute.gsub(/\?$/, '') }
     confirm = Typus::I18n.t("Change %{attribute}?", :attribute => item.class.human_attribute_name(attribute).downcase)
-    link_to Typus::I18n.t(human_boolean), options, :data => { :confirm => confirm }
+    # link_to Typus::I18n.t(human_boolean), options, :data => { :confirm => confirm }
+    check_box_tag attribute, item.id, status, data: { 
+      remote: true, 
+      confirm: confirm, 
+      url: url_for(controller: "/admin/#{item.class.to_resource}", action: "toggle", id: item.id), 
+      method: "POST", 
+      params: "field=#{attribute.gsub(/\?$/, '')}" 
+    }
   end
 
   def boolean_filter(filter)
