@@ -28,6 +28,8 @@ module Admin::Resources::DataTypes::StringHelper
       render "admin/templates/color_entry_table", value: value
     elsif @resource.typus_template(attribute) == "link"
       render "admin/templates/link_table", value: value
+    elsif @resource.typus_template(attribute) == "input"
+      render "admin/templates/input_table", value: value
     else
       value
     end
