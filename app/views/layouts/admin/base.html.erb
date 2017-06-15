@@ -24,10 +24,10 @@
       <% if controller.controller_name.eql?('dashboard') %>
         <%= yield %>
       <% else %>
-        <div class="span3">
+        <div class="span2">
           <%= build_sidebar %>
         </div>
-        <div class="span9">
+        <div class="span10">
           <%= yield :main_grid %>
         </div>
       <% end %>
