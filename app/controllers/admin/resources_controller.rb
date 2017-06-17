@@ -132,6 +132,21 @@ class Admin::ResourcesController < Admin::BaseController
     end
   end
 
+  def update_field
+    respond_to do |format|
+      if @item.update_attribute(params[:field], params[params[:field].to_sym])
+        format.html do
+          notice = Typus::I18n.t("%{model} successfully updated.", :model => @resource.model_name.human)
+          redirect_to :back, :notice => notice
+        end
+        format.json { render :json => @item }
+      else
+        format.html { render :edit }
+        format.json { render :json => @item.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
   private
 
   def get_model
