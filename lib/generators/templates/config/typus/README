@@ -10,6 +10,12 @@ Use this example as reference to customize your YAML files.
         form: title, body, is_published?, created_at
         show: title, category, is_published?
         relationship: title, status
+        relationship_[specific_resource]: title, position
+        # e.g. relationship_categories: fields
+        # will allow for special field selection within the context of categories only
+        relationship_name: Related Entries
+        relationship_[specific_resource]_name: Related Entries
+        # allows for naming the relationship section of the form
         options:
           booleans:
             is_published: ["Yes, it is", "No, it isn't"]

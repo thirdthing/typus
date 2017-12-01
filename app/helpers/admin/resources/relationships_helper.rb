@@ -16,9 +16,28 @@ module Admin::Resources::RelationshipsHelper
     @items = @data.limit(items_per_page).offset(offset)
   end
 
+  def relationship_fields_for_resource
+    model_specific_key = "relationship_#{@resource.to_resource}"
+    key = @model_to_relate.read_model_config['fields'][model_specific_key] ? model_specific_key : 'relationship'
+    @model_to_relate.typus_fields_for(key.to_sym)
+  end
+
+  def relationship_name
+    name = @resource.human_attribute_name(@association_name).titlecase
+    general_key = "relationship_name"
+    model_specific_key = "relationship_#{@resource.to_resource}_name"
+    if @model_to_relate.read_model_config['fields'][general_key]
+      name = @model_to_relate.read_model_config['fields'][general_key]
+    end
+    if @model_to_relate.read_model_config['fields'][model_specific_key]
+      name = @model_to_relate.read_model_config['fields'][model_specific_key]
+    end
+    name
+  end
+
   def build_relationship_table
     build_list(@model_to_relate,
-               @model_to_relate.typus_fields_for(:relationship),
+               relationship_fields_for_resource,
                @items,
                @model_to_relate_as_resource,
                {},
