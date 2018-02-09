@@ -72,7 +72,9 @@ module Admin::Resources::DataTypes::HasManyHelper
       html_options = {}
       html_options[:glyphicon] = 'edit'
       html_options['url'] = "/admin/#{klass.to_resource}/edit"
-      [ 'typus.buttons.edit', { action: 'edit', _from_parent: "/admin/#{@resource.to_resource}/edit/#{@item.id}" }, html_options ]
+      from_parent_url = "/admin/#{@resource.to_resource}/edit/#{@item.id}"
+      from_parent_url += "?offset=#{params['offset']}&per_page=#{params['per_page']}" if params['offset']
+      [ 'typus.buttons.edit', { action: 'edit', _from_parent: from_parent_url }, html_options ]
     end
     
   end
